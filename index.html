@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>TODO List</title>
+   <style>
+    
+        div{
+            width: 500px;
+       
+        text-align: center;
+       
+        padding: 30px;
+        }   
+    
+   </style>
+</head>
+
+<body>
+    <div class="main">
+    <h1><span class="title">test</span> List</h1>
+    <div class="inputDiv">
+    	 <label> Enter Text:</label> <input type="text" class="input">
+    	   <button class="add">Add New Element</button><br>
+           <span id="error"></span>
+    </div>
+    <div class="container">
+    </div>
+    <script>
+        const container = document.querySelector('.container');
+var inputValue = document.querySelector('.input');
+const add = document.querySelector('.add');
+class item{
+constructor(name){
+this.createItem(name);
+}
+createItem(name){
+var itemBox = document.createElement('div');
+itemBox.classList.add('item');
+
+var input = document.createElement('input');
+input.type = "text";
+input.disabled = true;
+input.value = name;
+input.classList.add('item_input');
+
+var edit = document.createElement('button');
+edit.classList.add('edit');
+edit.innerHTML = "Edit";
+edit.addEventListener('click', () => this.edit(input, name));
+
+var remove = document.createElement('button');
+remove.classList.add('remove');
+remove.innerHTML = "Remove";
+remove.addEventListener('click', () => this.remove(itemBox, name));
+
+
+container.appendChild(itemBox);
+
+itemBox.appendChild(input);
+itemBox.appendChild(edit);
+itemBox.appendChild(remove);
+
+}
+
+edit(input, name){
+if(input.disabled == true){
+   input.disabled = !input.disabled;
+}
+
+}
+
+ remove(itemBox, name){
+itemBox.parentNode.removeChild(itemBox);
+ }
+}
+
+add.addEventListener('click', check);
+window.addEventListener('keydown', (f) => {
+if(f.which == 87){
+check();
+}
+})
+
+function check(){
+if(inputValue.value=="")
+    {
+        document.getElementById("error").innerHTML="Please Enter the value";
+        return;
+    } else
+    {
+        document.getElementById("error").innerHTML="";
+        new item(inputValue.value);
+    }
+}
+for (var h = 0 ; h < input.length ; h++){
+new item(input[h]);
+}
+    </script>
+</div>             
+</body>
+</html>
